@@ -1,0 +1,48 @@
+import random
+
+def predict_spaceman(history):
+  """
+  Predice el resultado del próximo lanzamiento del Spaceman.
+
+  Args:
+    history: Una lista de los resultados de los últimos lanzamientos.
+
+  Returns:
+    Un número entero que representa el resultado del próximo lanzamiento.
+  """
+
+  # Histograma de los resultados de los últimos lanzamientos.
+
+  results_histogram = {}
+  for result in history:
+    if result not in results_histogram:
+      results_histogram[result] = 0
+    results_histogram[result] += 1
+
+  # Probabilidad de cada resultado.
+
+  probabilities = {}
+  for result, count in results_histogram.items():
+    probabilities[result] = count / len(history)
+
+  # Resultado más probable.
+
+  most_probable_result = max(probabilities, key=probabilities.get)
+
+  return most_probable_result
+
+def main():
+  # Historial de lanzamientos.
+
+  history = [1, 2, 2, 1, 1, 2, 1, 2, 1, 2]
+
+  # Predicción del próximo lanzamiento.
+
+  prediction = predict_spaceman(history)
+
+  # Imprimir la predicción.
+
+  print(prediction)
+
+if __name__ == "__main__":
+  main()
